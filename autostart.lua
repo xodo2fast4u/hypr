@@ -1,0 +1,8 @@
+-- See https://wiki.hypr.land/Configuring/Basics/Autostart/
+
+hl.on("hyprland.start", function()
+    hl.exec_cmd("waybar")
+    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("copyq")
+    hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
+end)
