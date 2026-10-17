@@ -16,6 +16,7 @@ hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("grimblast save screen ~/Pictures/Scr
 hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.exec_cmd("grimblast save area ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"))
 hl.bind("Escape", hl.dsp.exec_cmd("pkill wofi"))
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("/usr/bin/copyq toggle"))
+hl.bind("SUPER + L", hl.dsp.exec_cmd("~/.local/bin/toggle-theme.sh"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -56,9 +57,11 @@ hl.bind(mainMod .. " + ALT + up",    hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + ALT + down",  hl.dsp.window.swap({ direction = "down" }))
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
+local volumeScript = "~/.local/bin/volume.sh"
+
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(volumeScript .. " up"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(volumeScript .. " down"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(volumeScript .. " mute"), { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
